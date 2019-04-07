@@ -1,0 +1,2 @@
+class LcComp < ApplicationRecord
+end
