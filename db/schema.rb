@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_07_054109) do
+ActiveRecord::Schema.define(version: 2019_04_07_083120) do
 
   create_table "lc_classes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "lc_comp_id"
@@ -33,6 +33,24 @@ ActiveRecord::Schema.define(version: 2019_04_07_054109) do
     t.string "owner"
     t.text "link"
     t.text "lc_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "lc_results", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "lc_class_id"
+    t.string "name"
+    t.integer "runner_id"
+    t.string "ecard"
+    t.string "club"
+    t.string "start"
+    t.string "result"
+    t.string "rank"
+    t.string "speed"
+    t.string "loss_rate"
+    t.string "total_relative"
+    t.string "total_losstime"
+    t.string "ideal_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

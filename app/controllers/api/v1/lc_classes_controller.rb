@@ -1,17 +1,17 @@
 class Api::V1::LcClassesController < ApplicationController
+	before_action :require_have_comp
+
 	def index
-		@comp = LcComp.find_by_id(params[:comp_id])
-		@classes = (@comp.nil?) ? nil : @comp.lc_classes.all
+		@classes = @comp.lc_classes.all
 		render json: @classes
 	end
 
 	def show
-		@class = LcClass.find_by_id(params[:id])
+		@class = @comp.lc_classes.find_by_id(params[:id])
 		render json: @class
 	end
 
 	def create
-		@comp = LcComp.find_by_id(params[:comp_id])
 		@class = @comp.lc_classes.build(class_params)
 		render json: @class.save ? @class : @class.errors
 	end
@@ -30,5 +30,13 @@ class Api::V1::LcClassesController < ApplicationController
 	private
 		def class_params
 		  params.permit(:class_name, :length, :climb, :controls, :course, :filename, :file_id, :participants)
+		end
+
+		def require_have_comp
+			@comp = LcComp.find_by_id(params[:comp_id])
+			if @comp.nil?
+				render json: {"status": "error"}
+				return
+			end
 		end
 end

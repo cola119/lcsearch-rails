@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lc_class_id: 1
+  name: MyString
+  runner_id: 1
+  ecard: MyString
+  club: MyString
+  start: MyString
+  result: MyString
+  rank: MyString
+  speed: MyString
+  loss_rate: MyString
+  total_relative: MyString
+  total_losstime: MyString
+  ideal_time: MyString
+
+two:
+  lc_class_id: 1
+  name: MyString
+  runner_id: 1
+  ecard: MyString
+  club: MyString
+  start: MyString
+  result: MyString
+  rank: MyString
+  speed: MyString
+  loss_rate: MyString
+  total_relative: MyString
+  total_losstime: MyString
+  ideal_time: MyString
