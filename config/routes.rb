@@ -12,10 +12,14 @@ Rails.application.routes.draw do
 	namespace :api do
 		namespace :v1 do
 			resources :comps, :controller => :lc_comps do
+				collection do
+					get 'search'
+				end
 				resources :classes, :controller => :lc_classes do
 					resources :results, :controller => :lc_results
 				end
 			end
+			get '/results/search', to: 'lc_results#search'
 		end
 	end
 end

@@ -1,4 +1,9 @@
 class Api::V1::LcCompsController < ApplicationController
+	def search
+		@comps = params[:name].nil? ? nil : LcComp.where("name LIKE ?", '%'+params[:name]+'%').order(created_at: :desc)
+		render json: @comps
+	end
+
 	def index
 		@comps = LcComp.order(created_at: :desc)
 		# @comps = LcComp.where("name = ?", params[:name]).order(created_at: :desc)

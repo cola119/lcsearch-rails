@@ -1,5 +1,16 @@
 class Api::V1::LcResultsController < ApplicationController
-	before_action :require_have_comp_class
+	before_action :require_have_comp_class, except: [:search]
+
+	def search
+		query_name = params[:name].blank? ? nil : params[:name].strip.empty? ? nil : '%'+params[:name].strip+'%'
+		query_club = params[:club].blank? ? nil : params[:club].strip.empty? ? nil : '%'+params[:club].strip+'%'
+		if query_name.nil? || query_club.nil?
+			@results =  LcResult.where("(name LIKE ?) OR (club LIKE ?)", query_name, query_club).order(created_at: :desc)
+		else
+			@results =  LcResult.where("(name LIKE ?) AND (club LIKE ?)", query_name, query_club).order(created_at: :desc)
+		end
+		render json: @results
+	end
 
 	# GET    /api/v1/comps/:comp_id/classes/:class_id/results
 	def index
