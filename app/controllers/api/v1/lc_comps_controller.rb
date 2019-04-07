@@ -1,41 +1,33 @@
 class Api::V1::LcCompsController < ApplicationController
 	def index
-		lccomps = LcComp.where("name = ?", params[:name]).order(created_at: :desc)
-		render json: lccomps
-		# render json: { status: 'SUCCESS', message: 'loaded lccomps', data: lccomps }
+		@comps = LcComp.order(created_at: :desc)
+		# @comps = LcComp.where("name = ?", params[:name]).order(created_at: :desc)
+		render json: @comps
 	end
 
 	def show
-		lccomp = LcComp.find(params[:id])
-		render json: { status: 'SUCCESS', message: 'loaded lccomp', data: lccomp }
+		@comp = LcComp.find_by_id(params[:id])
+		render json: @comp
 	end
 
 	def create
-		lccomp = LcComp.new(lccomp_params)
-		if lccomp.save
-			render json: { status: 'SUCCESS', message: 'saved', data: lccomp }
-		else
-			render json: { status: 'ERROR', message: 'not saved', data: lccomp.errors }
-		end
+		@comp = LcComp.new(comp_params)
+		render json: @comp.save ? @comp : @comp.errors
 	end
 
 	def destroy
-		lccomp = LcComp.find(params[:id])
-		lccomp.destroy
-		render json: { status: 'SUCCESS', message: 'deleted', data: lccomp }
+		@comp = LcComp.find_by_id(params[:id])
+		@comp.destroy unless @comp.nil?
+		render json: @comp
 	end
 
 	def update
-		lccomp = LcComp.find(params[:id])
-		if lccomp.update(lccomp_params)
-			render json: { status: 'SUCCESS', message: 'updated', data: lccomp }
-		else
-			render json: { status: 'ERROR', message: 'not updated', data: lccomp }
-		end
+		@comp = LcComp.find_by_id(params[:id])
+		render json: @comp.nil? ? nil : @comp.update(comp_params) ? @comp : @comp.errors
 	end
 
 	private
-		def lccomp_params
+		def comp_params
 		  params.permit(:name, :date, :terrain, :owner, :link, :lc_link)
 		end
 end

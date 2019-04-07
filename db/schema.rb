@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_07_011106) do
+ActiveRecord::Schema.define(version: 2019_04_07_054109) do
+
+  create_table "lc_classes", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "lc_comp_id"
+    t.string "class_name"
+    t.float "length"
+    t.float "climb"
+    t.integer "controls"
+    t.string "course"
+    t.string "filename"
+    t.integer "file_id"
+    t.integer "participants"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "lc_comps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
