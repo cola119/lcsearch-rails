@@ -22,4 +22,5 @@ Rails.application.routes.draw do
 			get '/results/search', to: 'lc_results#search'
 		end
 	end
+	get '*path', controller: 'application', action: 'response_not_found'
 end

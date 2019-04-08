@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2019_04_07_083120) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lc_comps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "lc_comps", id: :integer, default: nil, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.date "date"
     t.string "terrain"
