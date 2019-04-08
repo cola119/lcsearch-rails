@@ -51,6 +51,11 @@ test:
 #
 production:
   <<: *default
-  database: lcsearch-rails_production
-  username: lcsearch-rails
-  password: <%= ENV['LCSEARCH-RAILS_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+# production:
+#   <<: *default
+#   database: lcsearch-rails_production
+#   username: lcsearch-rails
+#   password: <%= ENV['LCSEARCH-RAILS_DATABASE_PASSWORD'] %>
