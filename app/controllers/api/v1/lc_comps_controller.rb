@@ -8,7 +8,7 @@ class Api::V1::LcCompsController < ApplicationController
 
 	def index
 		@comps = LcComp.order(created_at: :desc)
-		return response_not_found(:comps) if @comps.nil?
+		return response_not_found(:comps) if @comps.blank?
 		response_success(:comps, :index, @comps)
 	end
 
@@ -21,6 +21,7 @@ class Api::V1::LcCompsController < ApplicationController
 	def create
 		@comp = LcComp.new(comp_params)
 		return response_bad_request unless @comp.valid?
+		return response_conflict(:comp) if LcComp.exists?(id: @comp.id)
 		@comp.save ? response_success(:comp, :create, @comp) : response_internal_server_error
 	end
 
@@ -40,6 +41,6 @@ class Api::V1::LcCompsController < ApplicationController
 
 	private
 		def comp_params
-		  params.permit(:name, :date, :terrain, :owner, :link, :lc_link)
+		  params.permit(:id, :name, :date, :terrain, :owner, :link, :lc_link)
 		end
 end
